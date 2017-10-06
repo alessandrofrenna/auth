@@ -1,5 +1,5 @@
 {
-    "name": "Yii2_Auth",
+    "name": "frenna/auth",
     "description": "Yii2 extension that allows authentication",
     "type": "yii2-extension",
     "autoload": {
