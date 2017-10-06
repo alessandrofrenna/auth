@@ -1,0 +1,14 @@
+{
+    "name": "Yii2_Auth",
+    "description": "Yii2 extension that allows authentication",
+    "type": "yii2-extension",
+    "autoload": {
+        "psr-4" : {
+            "frenna\\" : "src/"
+        }
+    },
+
+    "require": {
+        "yiisoft/yii2": "~2.0.12"
+    }
+}
