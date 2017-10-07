@@ -1,15 +1,15 @@
 <?php
 
-namespace frenna\auth\entities;
+namespace frenna\auth\models;
 
 use yii\base\Security;
 use yii\db\ActiveRecord;
 use yii\validators\EmailValidator;
 use yii\validators\StringValidator;
-use frenna\auth\entities\interfaces\UserIdentityInterface;
+use yii\web\IdentityInterface;
 use frenna\auth\exceptions\InvalidLoginParametersException;
 
-class User extends ActiveRecords implements UserIdentityInterface
+class User extends ActiveRecords implements IdentityInterface
 {
     private const STATUS_ACTIVE = 1;
     private const STATUS_DELETED = 0;
@@ -17,6 +17,21 @@ class User extends ActiveRecords implements UserIdentityInterface
     public function tableName()
     {
         return "auth_user";
+    }
+
+    public function getId()
+    {
+        return $this->getPrimaryKey();
+    }
+
+    public static function findIdentity($id)
+    {
+        return static::findOne($id);
+    }
+
+    public static function findIdentityByAccessToken($token, $type = NULL)
+    {
+        throw new \yii\base\NotSupportedException("This functionality is not supported yet!");
     }
 
     public static function findUser($param)
@@ -43,6 +58,16 @@ class User extends ActiveRecords implements UserIdentityInterface
     private function validatePassword($input)
     {
         return (new Security)->validatePassword($input, $this->password);
+    }
+
+    public function getAuthKey()
+    {
+        return $this->auth_key;
+    }
+
+    public function validateAuthKey($authkey)
+    {
+        return $this->getAuthKey() === $authkey; 
     }
 
 }

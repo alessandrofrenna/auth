@@ -1,6 +1,6 @@
 {
     "name": "frenna/auth",
-    "description": "Yii2 extension that allows authentication",
+    "description": "Yii2 module that allows simple athentication",
     "type": "yii2-extension",
     "autoload": {
         "psr-4" : {

@@ -2,9 +2,9 @@
 
 namespace frenna\auth;
 
-use yii\base\Component;
+use yii\base\Module;
 
-class Auth extends Component
+class Auth extends Module
 {
     
 }

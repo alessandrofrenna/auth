@@ -1,6 +1,6 @@
 <?php
 
-namespace frenna\auth\entities;
+namespace frenna\auth\models;
 
 use yii\base\Model;
 use frenna\auth\entities\User;
@@ -37,6 +37,11 @@ class LoginForm extends Model
             return User::findUser($this->credential);
         }
         return $this->user;
+    }
+
+    public function login()
+    {
+        return Yii::$app->user->login($this->getUser());
     }
 
 }
