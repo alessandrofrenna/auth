@@ -18,9 +18,11 @@ class AuthController extends Controller
                 'class' => AccessControl::className(),
                 'only'  => ['logout'],
                 'rules' => [
-                    'actions' => ['logout'],
-                    'allows'  => ['true'],
-                    'roles'   => ['@'],
+                    [
+                        'actions' => ['logout'],
+                        'allows'  => ['true'],
+                        'roles'   => ['@'],
+                    ],                    
                 ],
             ],
 
