@@ -1,4 +1,4 @@
-# Auth extension for YII2
+# Auth module for Yii2
 
 Allow your users to connecto to your Yii application with this module.
 
