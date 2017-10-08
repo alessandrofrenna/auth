@@ -2,8 +2,9 @@
 
 namespace frenna\auth\models;
 
+use Yii;
 use yii\base\Model;
-use frenna\auth\entities\User;
+use frenna\auth\models\User;
 
 class LoginForm extends Model 
 {
@@ -15,8 +16,8 @@ class LoginForm extends Model
     public function rules()
     {
         return [
-            ['credential', 'string', 'required'],
-            ['password', 'required'],
+            ['credential', 'string'],
+            [['credential', 'password'], 'required'],
             ['password', 'checkAndValidatePW'],
         ];
     }
@@ -26,7 +27,7 @@ class LoginForm extends Model
         if(!$this->hasErrors()){
             $user = $this->getUser();
             if(!$user || !$user->validatePassword($this->password)) {
-                $this->addError('Incorrect login credentials, please insert the correct username/email and password.');
+                $this->addError($attribute, 'Incorrect login credentials');
             }
         }
     }
@@ -41,7 +42,11 @@ class LoginForm extends Model
 
     public function login()
     {
-        return Yii::$app->user->login($this->getUser());
+        if($this->validate()) {
+            return Yii::$app->user->login($this->getUser());
+        } else {
+            return false;
+        }        
     }
 
 }

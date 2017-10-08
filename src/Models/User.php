@@ -2,19 +2,19 @@
 
 namespace frenna\auth\models;
 
-use yii\base\Security;
+use Yii;
 use yii\db\ActiveRecord;
 use yii\validators\EmailValidator;
 use yii\validators\StringValidator;
 use yii\web\IdentityInterface;
 use frenna\auth\exceptions\InvalidLoginParametersException;
 
-class User extends ActiveRecords implements IdentityInterface
+class User extends ActiveRecord implements IdentityInterface
 {
     private const STATUS_ACTIVE = 1;
     private const STATUS_DELETED = 0;
 
-    public function tableName()
+    public static function tableName()
     {
         return "auth_user";
     }
@@ -37,27 +37,27 @@ class User extends ActiveRecords implements IdentityInterface
     public static function findUser($param)
     {
         if((new EmailValidator)->validate($param)) {
-            return findByEmail($param);
+            return static::findByEmail($param);
         } else if ((new StringValidator)->validate($param)){
-            return findByUsername($param);
+            return static::findByUsername($param);
         }
 
         throw new InvalidLoginParametersException('Set a valid email/username');
     }
 
-    private function findByUsername($username)
+    private static function findByUsername($username)
     {
         return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
     }
 
-    private function findByEmail($email)
+    private static function findByEmail($email)
     {
-        return static::findOne(['username' => $username, 'status' => self::STATUS_ACTIVE]);
+        return static::findOne(['email' => $email, 'status' => self::STATUS_ACTIVE]);
     }
 
-    private function validatePassword($input)
+    public function validatePassword($input)
     {
-        return (new Security)->validatePassword($input, $this->password);
+        return Yii::$app->security->validatePassword($input, $this->password);
     }
 
     public function getAuthKey()

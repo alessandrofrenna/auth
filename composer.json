@@ -1,6 +1,23 @@
 {
     "name": "frenna/auth",
-    "description": "Yii2 module that allows simple athentication",
+    "version": "1.0.0",
+    "description": "Yii2 module that allows basic athentication.",
+    "keywords": ["yii2", "yii", "authentication", "user", "module", "extension", "auth"],
+    "license" : "BSD-3-Clause",
+    
+    "support": {
+        "source": "https://github.com/alessandrofrenna/auth",
+        "issues": "https://github.com/alessandrofrenna/auth/issues"
+    },
+
+    "authors": [
+        {
+            "name": "Alessandro Frenna",
+            "email": "alessandrofrenna95@gmail.com",
+            "role": "developer"
+        }
+    ],
+
     "type": "yii2-extension",
     "autoload": {
         "psr-4" : {
@@ -10,5 +27,11 @@
 
     "require": {
         "yiisoft/yii2": "~2.0.12"
+    },
+
+    "extra": {
+        "branch-alias": {
+            "stable": "1.0-stable"
+        }
     }
 }
